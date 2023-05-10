@@ -1,0 +1,359 @@
+:root {                         /* <--- Declarar variables en CSS */
+    --blanco: #FFFFFF;
+    --oscuro: #212121;
+    --primario: #FFC107;
+    --secundario: #0097A7;
+    --gris: #757575;
+    --grisClaro: #DFE9F3;
+}
+
+/* GLOBAL */
+html {
+    font-size: 62.5%;           /* <--- 1rem = 10px */
+    box-sizing: border-box;     /* <--- Elimina Box Model */
+    scroll-snap-type: y proximity;
+}
+
+*, *::before, *::after {        /* <--- Elimina Box Model */
+    box-sizing: inherit;
+}
+
+body {
+    font-size: 16px;            /* <--- 1rem = 10px */
+    font-family: 'Krub', sans-serif;
+    font-weight: 400;
+    background-image: linear-gradient(to top, var(--grisClaro) 0%, var(--blanco) 100%); /*degradado del fondo */
+}
+
+.sombra {
+    -webkit-box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.8);
+    -moz-box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.8);
+    box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.8);
+    background-color: var(--blanco);
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+h1 {
+    font-size: 3.8rem;
+}
+
+h2 {
+    font-size: 2.8rem;
+}
+
+h3 {
+    font-size: 1.8rem;
+}
+
+h1,h2,h3 {
+    text-align: center;
+}
+
+.titulo span {
+  font-size: 2rem;
+}
+
+.contenedor .sombra{
+    max-width: 120rem;
+    margin: 0 auto;
+}
+
+
+.boton {
+    background-color: var(--secundario);
+    color: var(--blanco);
+    padding: 1rem 3rem;
+    margin-top: 3rem;
+    font-size: 2rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: .5rem;
+    width: 90%;
+    text-align: center;
+    border: none;
+}
+
+@media (min-width: 768px) {     /* <--- Los media querie heredan los atributos del elemento a modificar... */
+    .boton {                    /*      ...y se aplican los cambios a partir de esa resolucion (768px) */
+        width: auto;
+    }
+}
+
+.boton:hover {
+    cursor: pointer;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .w-100 {
+        width: auto;
+    }
+}
+
+.flex {
+    display: flex;
+}
+
+.alinear-derecha {
+    justify-content: flex-end;
+}
+
+.nav-bg {
+    background-color: var(--secundario);
+    padding: 0.5rem;
+}
+
+.navegacion-principal {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+@media (min-width: 768px) {
+    .navegacion-principal {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+}
+
+.navegacion-principal a {
+    display: block;
+    text-align: center;
+    padding: 1rem;
+    color: var(--blanco);
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.navegacion-principal a:hover {
+    background-color: var(--primario);
+    color: var(--oscuro);
+}
+
+
+.hero {
+    background-image: url(../img/setup.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 500px;
+    padding: 20px;
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.contenido-hero {
+    position: absolute;
+    background-color: rgb(0 0 0 / 50%);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenido-hero h2, .contenido-hero p {
+    color: var(--blanco);
+}
+
+.ubicacion  {
+    display: flex;
+    align-items: flex-end;
+}
+
+/** SCROLL SNAP **/
+
+.servicios, .navegacion-principal, .formulario {
+    scroll-snap-align: center;
+
+}
+
+
+@media (min-width: 768px) {
+    .servicios {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 1fr significa que va a fraccionar al padre y le dara el valor fraccionado segun el numero de fr's */
+        column-gap: 5rem;
+    }
+}
+
+.servicio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.servicio h3 {
+    color: var(--secundario);
+    font-weight: normal;
+}
+
+.servicio h3 p {
+    line-height: 2;
+    text-align: center;
+}
+
+.servicio .iconos {
+    height: 15rem;
+    width: 15rem;
+    background-color: var(--primario);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*contactos*/
+
+.formulario {
+    background-color: var(--gris);
+    width: min(60rem, 100%); /*Utiliza el valor mas pequeño segun la resolucion del dispositivo)*/
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+.formulario fieldset {
+    border: none;
+}
+
+.formulario legend {
+    text-align: center;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--primario);
+}
+
+@media (min-width: 768px) {
+    .contenedor-campos {
+        display: grid;
+        grid-template-columns: 2fr 2fr;
+        grid-template-rows: auto auto 20rem;
+        column-gap: 2rem;
+    }
+    .campo:nth-child(3), .campo:nth-child(4) {
+        grid-column: 1/3;
+    }
+}
+
+
+.campo {
+    margin-bottom: 1rem;
+}
+
+.campo label {
+    color: var(--blanco);
+    font-weight: bold;
+    margin-bottom: .5rem;
+    display: block;
+}
+
+.campo textarea {
+    height: 20rem;
+}
+
+.input-text {
+    width: 100%;
+    border: none;
+    padding: 1.5rem;
+    border-radius: .5rem;
+}
+
+.footer {
+    text-align: center;
+}
+
+.footer p {
+    font-weight: 500;
+}
+
+
+.login--contenedor-campos {
+    display: grid;
+    grid-template-columns: repeat(6, 16.6%);
+    height: 70vh;
+}
+
+.login--iniciar--sesion {
+    grid-column-start: 3;
+    grid-column-end: 5;
+    display: flex;
+    align-items: center;
+}
+
+.login--form {
+    width: 70%;
+    margin: auto;
+}
+
+.login--form--input {
+    margin-bottom: 1.5rem;
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.menu {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.menu_signin {
+    margin-right: 3rem;
+}
+
+.menu div a {
+    display: block;
+    text-align: center;
+    padding: 1rem;
+    color: var(--blanco);
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.menu div a:hover {
+    background-color: var(--primario);
+    color: var(--oscuro);
+}
+
+.account {
+    display: grid;
+    grid-template-columns: repeat(6, 16.6%);
+    margin: 5rem 0;
+}
+
+.account_container {
+    grid-column-start: 3;
+    grid-column-end: 5;
+    display: flex;
+    align-items: center;
+}
+
+.account_form {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.account_form--input {
+    margin-bottom: 1.5rem;
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}

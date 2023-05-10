@@ -22,11 +22,11 @@
     </header>
 
     <div class="nav-bg">
-        <nav class="navegacion-principal contenedor">
+        <nav class="navegacion-principal">
             <a href="#">Inicio</a>
             <a href="#">Sobre mi</a>
             <a href="#">Clientes</a>
-            <a href="#">Contactos</a>
+            <a href="descarga.html">Descarga</a>
         </nav>
     </div>
     
@@ -99,7 +99,7 @@
     
         <section>
             <h2>Contacto</h2>
-            <form class="formulario">
+            <form action="descarga.php" class="formulario">
                 <fieldset>
                     <legend>Hazme saber tu opinión</legend>
                         <div class="contenedor-campos">
@@ -125,8 +125,7 @@
                         </div> <!-- Contenedor campos-->
                         
                         <div class="alinear-derecha flex">
-                            <input class="boton w-100" type="submit" value="Enviar">
-
+                            <input class="boton w-100" type="submit" value="Enviar" name="generarPDF">
                             <!--
 
                                 PROGRAMAR EL BOTON PARA QUE GENERE UN PDF Y LO ENVIE A UNA NUEVA PAGINA DONDE PODRA DESCARGAR ESA INFORMACION

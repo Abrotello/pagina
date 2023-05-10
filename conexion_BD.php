@@ -1,6 +1,6 @@
 <?php
 
-    //Variables para entrar a la base de datos
+    #Variables para entrar a la base de datos
     $nameserver = "localhost";
     $username = "adrian";
     $password = "12345";

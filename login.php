@@ -1,30 +1,23 @@
 <?php
 
-    include_once 'conexion_BD.php';
+include_once('conexion_BD.php');
 
-    if($conexion) {
-        session_start();
-
+if(!empty($_POST["btnIngresar"])) {
+    if(empty($_POST["name"]) and empty($_POST["contrasena"])) {
+        echo "Los campos estan vacios";
+    } else {
         $iName = $_POST['name'];
         $iPasswd = $_POST['contrasena'];
 
-        $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE nombre = '$iName' AND contrasena = '$iPasswd'");
-        
-        if($consulta) {
-            $rowcount = mysqli_num_rows($consulta);
+        $sql = $conexion->query("SELECT * FROM usuario WHERE usuario = '$iName' AND contrasena = '$iPasswd'");
 
-            if($rowcount != 0) {
-                header('Location: principal.html');
-            }
-
+        if($datos = $sql->fetch_object()) {
+            header("location:principal.html");
         } else {
-            echo 'Error en la consulta.'.mysqli_connect_error();
-            header('Location: index.html');
+            echo "El usuario no existe";
         }
 
-    } else {
-        echo 'Error en la conexion a la base de datos '.  msqli_connect_error();
-        exit(); 
     }
+}
 
 ?>
