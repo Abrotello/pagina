@@ -1,31 +1,43 @@
 <?php
 
-include_once('conexion_BD.php');
+include("conexion_BD.php");
 
-if(!empty($_POST["btnIngresar"])) {
-    if(empty($_POST["name"]) and empty($_POST["contrasena"])) {
-        echo "Los campos estan vacios";
+$nombre = $_POST["name"];
+$password = $_POST["contrasena"];
+
+//Login
+if(isset($_POST["btnIngresar"])) {
+    
+    $sql = msqli_query($conexion, "SELECT * FROM usuario WHERE usuario = '$nombre' AND contrasena = '$password'");
+    $nr = mysqli_num_rows($sql);
+
+    if($nr==1) {
+        echo "<script> alert('Bienvenido $nombre'); window.location='principal.html' </script>";
     } else {
-
-        session_start();
-
-        $iName = $_POST['name'];
-        $iPasswd = $_POST['contrasena'];
-
-        $_SESSION["usuario"] = $iName;
-        $_SESSION["password"] = $iPasswd; 
-
-        $sql = $conexion->query("SELECT * FROM usuario WHERE usuario = '$iName' AND contrasena = '$iPasswd'");
-
-        if($datos = $sql->fetch_object()) {
-            header("location:principal.html");
-        } else {
-            echo "El usuario no existe";
-        }
-
+        echo "<script> alert('Usuario no existe'); window.location='index.html' </script>";
     }
+
 }
 
-msqli_close($conexion);
+$Name = $_POST['nombre'];
+$Apellidos = $_POST['apellidos'];
+$Usuario = $_POST['usuario'];
+$Passwd = $_POST['contra'];
+$Confirm_Passwd = $_POST['conf_contra'];
+
+
+//Registro
+if(isset($_POST["btnRegistrar"])) {
+    if($Passwd == $Confirm_Passwd) {
+        
+        $sqlDatos = "INSERT INTO usuario(nombre,apellidos,usuario,contrasena,confirmar_contrasena) VALUES('$Name','$Apellidos','$Usuario','$Passwd','$Confirm_Passwd ')";
+
+        if(mysqli_query($conexion,$sqlDatos)) {
+            echo "<script> alert('Usuario registrado'); window.location='index.html' </script>";
+        } else {
+            echo "Error: ".$sql."<br>".mysql_error($conexion);
+        }
+    }
+}
 
 ?>
