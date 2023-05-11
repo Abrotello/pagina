@@ -7,14 +7,20 @@ $password = $_POST["contrasena"];
 
 //Login
 if(isset($_POST["btnIngresar"])) {
+
+    echo "Se presiono el boton";
     
     $sql = msqli_query($conexion, "SELECT * FROM usuario WHERE usuario = '$nombre' AND contrasena = '$password'");
     $nr = mysqli_num_rows($sql);
 
+    echo "Se hizo la consulta";
+
     if($nr==1) {
-        echo "<script> alert('Bienvenido $nombre'); window.location='principal.html' </script>";
+        echo "<script> alert('Bienvenido $nombre'); </script>";
+        header("Location:principal.html");
     } else {
-        echo "<script> alert('Usuario no existe'); window.location='index.html' </script>";
+        echo "<script> alert('Usuario no existe'); </script>";
+        header("Location:index.html");
     }
 
 }

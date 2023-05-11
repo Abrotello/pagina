@@ -8,4 +8,10 @@
 
     $conexion = new msqli($nameserver, $username, $password, $database, "");
     $conexion->set_charset("utf8");
+
+    if(!$conexion) {
+        die("Conexion fallidaa ".mysqli_connect_error());
+    } else {
+        echo "Conexion con exito";
+    }
 ?>
