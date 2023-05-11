@@ -14,24 +14,27 @@ f(!$conexion) {
 } 
 
 $nombre = $_POST["name"];
-$password = $_POST["contrasena"];
+$passwd = $_POST["contrasena"];
 
 //Login
 if(isset($_POST["btnIngresar"])) {
     
     echo "Se presiono el boton";
 
-    $sql = msqli_query($conexion, "SELECT * FROM usuario WHERE usuario = '$nombre' AND contrasena = '$password'");
-    $nr = mysqli_num_rows($sql);
+    $sql = "SELECT * FROM registros WHERE usuario = '$nombre' AND contrasena = '$passwd'";
+    $resultado = mysqli_query($conexion,$sql);
 
     echo "Se hizo la consulta";
 
-    if($nr==1) {
-        echo "<script> alert('Bienvenido $nombre'); </script>";
-        header("Location:principal.html");
+    if(mysqli_num_rows($resultado)==1) {
+        session_start();
+        $_SESSION['usuario'] = $nombre;
+        $_SESSION['passwd'] = $passwd;
+        echo "<script> alert('Bienvenido: $nombre'); window.location='principal.html' </script>";
+        #header("Location:principal.html");
     } else {
-        echo "<script> alert('Usuario no existe'); </script>";
-        header("Location:index.html");
+        echo "<script> alert('Usuario no existe'); window.location='index.html' </script>";
+        #header("Location:index.html");
     }
 
 }
