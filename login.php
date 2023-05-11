@@ -6,8 +6,14 @@ if(!empty($_POST["btnIngresar"])) {
     if(empty($_POST["name"]) and empty($_POST["contrasena"])) {
         echo "Los campos estan vacios";
     } else {
+
+        session_start();
+
         $iName = $_POST['name'];
         $iPasswd = $_POST['contrasena'];
+
+        $_SESSION["usuario"] = $iName;
+        $_SESSION["password"] = $iPasswd; 
 
         $sql = $conexion->query("SELECT * FROM usuario WHERE usuario = '$iName' AND contrasena = '$iPasswd'");
 
@@ -19,5 +25,7 @@ if(!empty($_POST["btnIngresar"])) {
 
     }
 }
+
+msqli_close($conexion);
 
 ?>
