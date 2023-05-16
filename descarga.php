@@ -14,13 +14,14 @@ if(!isset($Usuario)) {
     exit();
 }
 
-if($_SERVER["REQUEST_METHOD"] == "POST") {
+if(isset($_GET["btngenerarPDF"])) {
     $nombre = $_POST["nombre"];
     $telefono = $_POST["telefono"];
     $correo = $_POST["correo"];
     $mensaje = $_POST["mensaje"];
 
     $sql = $conexion->query("INSERT INTO formulario(nombre,telefono,correo,mensaje) VALUES('$nombre','$telefono','$correo','$mensaje')");
+    echo "se hizo la consulta";
 
     if($sql) {
         $pdf = new FPDF();
@@ -37,8 +38,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $pdf->Cell(40,10,'Mensaje: '.$mensaje);
         $pdf->Ln();
 
-        $pdf->Output('F','/home/formulario.pdf');
-        exec("sshpass -p 12345 scp -v /home/formulario.pdf root@10.20.30.12:/var/www/webdav/descargas");
+        echo "se creo el PDF";
+
+        //$pdf->Output('F','/home/formulario.pdf');
+        exec("mkdir $Usuario");
+        echo "se creo la carpeta del Usuario";
 
     } else {
         echo "Ocurrio un error";
